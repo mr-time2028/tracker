@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Shipment
+
+
+@admin.register(Shipment)
+class ShipmentAdmin(admin.ModelAdmin):
+    pass
