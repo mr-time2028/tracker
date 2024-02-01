@@ -17,6 +17,14 @@ build==1.0.3
     # via
     #   -r requirements.in
     #   pip-tools
+certifi==2023.11.17
+    # via
+    #   -r requirements.in
+    #   requests
+charset-normalizer==3.3.2
+    # via
+    #   -r requirements.in
+    #   requests
 click==8.1.7
     # via
     #   -r requirements.in
@@ -37,6 +45,10 @@ drf-spectacular==0.27.1
     # via -r requirements.in
 gunicorn==21.2.0
     # via -r requirements.in
+idna==3.6
+    # via
+    #   -r requirements.in
+    #   requests
 inflection==0.5.1
     # via
     #   -r requirements.in
@@ -79,6 +91,8 @@ referencing==0.33.0
     #   -r requirements.in
     #   jsonschema
     #   jsonschema-specifications
+requests==2.31.0
+    # via -r requirements.in
 rpds-py==0.17.1
     # via
     #   -r requirements.in
@@ -103,6 +117,10 @@ uritemplate==4.1.1
     # via
     #   -r requirements.in
     #   drf-spectacular
+urllib3==2.2.0
+    # via
+    #   -r requirements.in
+    #   requests
 wheel==0.42.0
     # via pip-tools
 

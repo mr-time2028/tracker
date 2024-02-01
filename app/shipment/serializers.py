@@ -1,24 +1,22 @@
 from rest_framework import serializers
 
 from .models import Shipment
-from article.models import Article
+from article.serializers import ArticleSerializer
+from dashboard.serializers import (
+    SenderSerializer,
+    ReceiverSerializer,
+)
 
 
 class TraceSerializer(serializers.Serializer):
     tracking_number = serializers.CharField(max_length=10)
 
 
-class ArticleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Article
-        fields = ("name", "sku", "price", "quantity")
-
-
 class ShipmentSerializer(serializers.ModelSerializer):
-    sender = serializers.CharField(source='sender.address')
-    receiver = serializers.CharField(source='receiver.address')
+    sender = SenderSerializer()
+    receiver = ReceiverSerializer()
     carrier = serializers.CharField(source='carrier.name')
-    article = ArticleSerializer(read_only=True)
+    article = ArticleSerializer()
     status = serializers.SerializerMethodField("get_status")
 
     class Meta:

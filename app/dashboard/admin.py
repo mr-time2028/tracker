@@ -4,6 +4,7 @@ from .models import (
     Sender,
     Receiver,
     Carrier,
+    Address,
 )
 
 
@@ -19,4 +20,9 @@ class ReceiverAdmin(admin.ModelAdmin):
 
 @admin.register(Carrier)
 class CarrierAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Address)
+class AddressAdmin(admin.ModelAdmin):
     pass

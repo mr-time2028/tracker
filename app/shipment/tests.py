@@ -12,6 +12,7 @@ from dashboard.models import (
 )
 from shipment.models import Shipment
 from article.models import Article
+from .utils import create_address_obj
 
 
 class TrackShipmentAPITest(APITestCase):
@@ -19,9 +20,12 @@ class TrackShipmentAPITest(APITestCase):
         self.track_shipment_path = reverse("shipment:shipments-track")
         self.client = APIClient()
 
+        self.sender_address = create_address_obj("Street 1, 10115 Berlin, Germany")
+        self.receiver_address = create_address_obj("Street 10, 75001 Paris, France")
+
         self.carrier = Carrier.objects.create(name="DHL")
-        self.sender = Sender.objects.create(address="Street 1, 10115 Berlin, Germany")
-        self.receiver = Receiver.objects.create(address="Street 10, 75001 Paris, France")
+        self.sender = Sender.objects.create(address=self.sender_address)
+        self.receiver = Receiver.objects.create(address=self.receiver_address)
         self.article = Article.objects.create(
             name="Laptop",
             sku="LP123",

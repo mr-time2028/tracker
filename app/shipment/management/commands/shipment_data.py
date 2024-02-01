@@ -10,20 +10,24 @@ from dashboard.models import (
     Receiver,
 )
 from article.models import Article
+from shipment.utils import create_address_obj
 
 
 class Command(BaseCommand):
     help = 'Import shipment data from JSON file'
 
     def handle(self, *args, **options):
-        file_path = os.getcwd() + '/shipment/data.json'  # Update with the path to your JSON file
+        file_path = os.getcwd() + '/shipment/data.json'
 
         with open(file_path, 'r') as jsonfile:
             data = json.load(jsonfile)
             for item in data:
+                sender_address_obj = create_address_obj(item["sender_address"])
+                receiver_address_obj = create_address_obj(item["receiver_address"])
+
                 carrier = Carrier.objects.create(name=item["carrier"])
-                sender = Sender.objects.create(address=item["sender_address"])
-                receiver = Receiver.objects.create(address=item["receiver_address"])
+                sender = Sender.objects.create(address=sender_address_obj)
+                receiver = Receiver.objects.create(address=receiver_address_obj)
                 article = Article.objects.create(
                     name=item["article_name"],
                     sku=item["SKU"],
@@ -46,7 +50,7 @@ class Command(BaseCommand):
                     receiver=receiver,
                     sender=sender,
                     article=article,
-                    status=status_mapping.get(item["status"], Shipment.IN_TRANSIT),  # Default to IN_TRANSIT if status is not recognized
+                    status=status_mapping.get(item["status"], Shipment.IN_TRANSIT),     # Default to IN_TRANSIT
                 )
 
         self.stdout.write(self.style.SUCCESS('Data import completed successfully.'))
