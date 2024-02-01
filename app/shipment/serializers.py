@@ -4,11 +4,8 @@ from .models import Shipment
 from article.models import Article
 
 
-class TrackSerializer(serializers.Serializer):
+class TraceSerializer(serializers.Serializer):
     tracking_number = serializers.CharField(max_length=10)
-
-    class Meta:
-        fields = ('tracking_number',)
 
 
 class ArticleSerializer(serializers.ModelSerializer):
