@@ -164,3 +164,17 @@ SPECTACULAR_SETTINGS = {
 
 # OpenWeatherMap settings
 OPEN_WEATHER_MAP_API_KEY = config("OPEN_WEATHER_MAP_API_KEY")
+
+
+# Cache settings
+WEATHER_DATA_CACHE_TIME = 2 * 60 * 60     # 2 hours
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': f'redis://:{config("REDIS_PASSWORD")}@{config("REDIS_HOST")}:6379/0',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    }
+}
