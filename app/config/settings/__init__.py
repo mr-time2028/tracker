@@ -1,4 +1,4 @@
-from .base import *
+from decouple import config
 
 env_name = config("ENV_NAME", default="dev")
 

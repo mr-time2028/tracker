@@ -19,7 +19,10 @@ click==8.1.7
 django==5.0.1
     # via
     #   -r requirements.in
+    #   django-debug-toolbar
     #   djangorestframework
+django-debug-toolbar==4.2.0
+    # via -r requirements.in
 djangorestframework==3.14.0
     # via -r requirements.in
 gunicorn==21.2.0
@@ -49,6 +52,7 @@ sqlparse==0.4.4
     # via
     #   -r requirements.in
     #   django
+    #   django-debug-toolbar
 tomli==2.0.1
     # via
     #   -r requirements.in
